@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840F96FF1F2F6AD600E6CA8D /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F96FE1F2F6AD600E6CA8D /* MenuButton.swift */; };
+		840F97021F2F71B300E6CA8D /* ProcessVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F97011F2F71B200E6CA8D /* ProcessVideo.swift */; };
+		840F97041F2F723E00E6CA8D /* VideosInProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F97031F2F723E00E6CA8D /* VideosInProcess.swift */; };
 		9A1D86961F0A676400F26409 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D86951F0A676400F26409 /* Realm.swift */; };
 		9A61966E1F07D9E6008BF5FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A61966D1F07D9E6008BF5FD /* AppDelegate.swift */; };
 		9A6196701F07D9E6008BF5FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A61966F1F07D9E6008BF5FD /* ViewController.swift */; };
@@ -34,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		7CB424C0090E12B8B0553D9C /* Pods-VideoCapture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoCapture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VideoCapture/Pods-VideoCapture.debug.xcconfig"; sourceTree = "<group>"; };
+		840F96FE1F2F6AD600E6CA8D /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		840F97011F2F71B200E6CA8D /* ProcessVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessVideo.swift; sourceTree = "<group>"; };
+		840F97031F2F723E00E6CA8D /* VideosInProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosInProcess.swift; sourceTree = "<group>"; };
 		9A1D86951F0A676400F26409 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		9A61966A1F07D9E6008BF5FD /* VideoCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A61966D1F07D9E6008BF5FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +94,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		840F97001F2F719F00E6CA8D /* RealmModel */ = {
+			isa = PBXGroup;
+			children = (
+				840F97011F2F71B200E6CA8D /* ProcessVideo.swift */,
+				840F97031F2F723E00E6CA8D /* VideosInProcess.swift */,
+			);
+			name = RealmModel;
+			sourceTree = "<group>";
+		};
 		92BD1829A0FF147E74F43E9A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,8 +155,10 @@
 		9A6196821F0806A3008BF5FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				840F97001F2F719F00E6CA8D /* RealmModel */,
 				9A6196831F0806DC008BF5FD /* LoginController.swift */,
 				9A61966F1F07D9E6008BF5FD /* ViewController.swift */,
+				840F96FE1F2F6AD600E6CA8D /* MenuButton.swift */,
 				9AEEE9D71F274F6B005E2B35 /* SessionViewController.swift */,
 				9AEEE9DB1F2756DD005E2B35 /* SessionCell.swift */,
 				9AEEE9D31F2723B9005E2B35 /* VideoCapture-Bridging-Header.h */,
@@ -287,9 +304,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840F97041F2F723E00E6CA8D /* VideosInProcess.swift in Sources */,
 				9AEEE9DC1F2756DD005E2B35 /* SessionCell.swift in Sources */,
 				9AFA37E31F0AA52300A33C49 /* TableViewCell.swift in Sources */,
+				840F96FF1F2F6AD600E6CA8D /* MenuButton.swift in Sources */,
 				9A6196701F07D9E6008BF5FD /* ViewController.swift in Sources */,
+				840F97021F2F71B300E6CA8D /* ProcessVideo.swift in Sources */,
 				9A6196841F0806DC008BF5FD /* LoginController.swift in Sources */,
 				9A61966E1F07D9E6008BF5FD /* AppDelegate.swift in Sources */,
 				9AEEEAD21F2A2736005E2B35 /* PopUPManu.swift in Sources */,

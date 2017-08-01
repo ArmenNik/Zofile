@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,7 +38,7 @@
                                 <constraint firstAttribute="width" secondItem="h9s-tV-wW1" secondAttribute="height" multiplier="1:1" id="hU5-8D-4qG"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oa-xB-GQt">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oa-xB-GQt" customClass="MenuButton" customModule="VideoCapture" customModuleProvider="target">
                             <rect key="frame" x="131.5" y="177.5" width="112.5" height="112.5"/>
                             <connections>
                                 <action selector="frontAction:" destination="cka-6y-7Zs" eventType="touchUpInside" id="CpW-6K-IJd"/>
@@ -47,7 +47,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Qs-Po-5QE">
                             <rect key="frame" x="47" y="309.5" width="112.5" height="112.5"/>
                         </imageView>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yC8-28-l0y">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yC8-28-l0y" customClass="MenuButton" customModule="VideoCapture" customModuleProvider="target">
                             <rect key="frame" x="47" y="309" width="112.5" height="112.5"/>
                             <connections>
                                 <action selector="leftAction:" destination="cka-6y-7Zs" eventType="touchUpInside" id="OKT-Q1-gfZ"/>
@@ -56,7 +56,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A5S-ts-nj6">
                             <rect key="frame" x="216" y="309.5" width="112.5" height="112.5"/>
                         </imageView>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0X-Rp-A1N">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w0X-Rp-A1N" customClass="MenuButton" customModule="VideoCapture" customModuleProvider="target">
                             <rect key="frame" x="215.5" y="309" width="112.5" height="112.5"/>
                             <connections>
                                 <action selector="rightAction:" destination="cka-6y-7Zs" eventType="touchUpInside" id="Cep-zn-8xy"/>
@@ -106,8 +106,11 @@
                 <constraint firstItem="sda-ck-y8j" firstAttribute="top" secondItem="cka-6y-7Zs" secondAttribute="top" id="ivh-7l-hAd"/>
             </constraints>
             <connections>
+                <outlet property="frontButton" destination="4oa-xB-GQt" id="ykC-lQ-7ns"/>
                 <outlet property="frontImage" destination="h9s-tV-wW1" id="RRD-9n-LcU"/>
+                <outlet property="leftButton" destination="yC8-28-l0y" id="BVy-pz-p0K"/>
                 <outlet property="leftImage" destination="6Qs-Po-5QE" id="okQ-r0-Fyh"/>
+                <outlet property="rightButton" destination="w0X-Rp-A1N" id="IHh-oy-1wa"/>
                 <outlet property="rightImage" destination="A5S-ts-nj6" id="GB7-ED-qUS"/>
             </connections>
             <point key="canvasLocation" x="-112" y="129"/>

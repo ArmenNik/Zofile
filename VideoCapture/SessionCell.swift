@@ -17,8 +17,10 @@ class SessionCell: UITableViewCell {
     @IBOutlet weak var processedIndikator: UIActivityIndicatorView!
     var videoType: Int?
     var dawnloadTimer: Timer?
-    var videoLenght: String?
+    var videoLength: String?
     var result: [String: Any]?
+    var originalVideoURL : URL?
+    var oprocessedVideoURL : URL?
     @IBOutlet weak var originalIndikator: UIActivityIndicatorView!
     @IBOutlet weak var processedImage: UIImageView!
     @IBOutlet weak var originalImage: UIImageView!
@@ -95,10 +97,16 @@ class SessionCell: UITableViewCell {
     
     
     
-    func setupCell(name: String?, type: Int, parrent : SessionViewController) {
+    func setupCell(name: String?, type: Int, parrent : SessionViewController, length: String, videoURL: String) {
         self.sessionName = name
         self.videoType = type
         self.parrentController = parrent
+        self.videoLength = length
+        if let url = URL.init(string: videoURL) {
+            self.originalVideoURL = url
+            self.isOriginalVideoExist = true
+            self.dawnload()
+        }
         
        
         
@@ -121,10 +129,8 @@ class SessionCell: UITableViewCell {
                 
             }, failured: {
                 
-                if self.videoLenght == nil {
-                    self.getVideoLenght()
-                }else {
-                    self.dawnloadProcessedVideo(lenght:  self.videoLenght!)
+                if self.videoLength != nil {
+                    self.dawnloadProcessedVideo(lenght:  self.videoLength!)
                 }
                 
             })
@@ -138,15 +144,10 @@ class SessionCell: UITableViewCell {
         
         if self.isOriginalVideoExist {
             if SessionCell.isConnected() {
-            self.originalIndikator.startAnimating()
-            VideoDawnloader.sharedInstance.downloadVideoFromFirebase(sessionName: self.getSessionName,
-                                                                     type: self.getVideotype,
-                                                                     success: {[unowned self] (url) in
-                                                                        print(url)
-                                                                        self.setupAvplayerViewController(videoURL: url)
-            }) { (errror) in
-                print(errror)
-            }
+                if (self.originalVideoURL != nil) {
+                    self.originalIndikator.startAnimating()
+                    self.setupAvplayerViewController(videoURL: self.originalVideoURL!)
+                }
             
             } else {
                 let alert = self.internetConnectionAlert()
@@ -163,15 +164,8 @@ class SessionCell: UITableViewCell {
         
             if SessionCell.isConnected() {
                 self.processedIndikator.startAnimating()
-                VideoDawnloader.sharedInstance.downloadProcessedVideoFromFirebase(sessionName: self.getSessionName,
-                                                                         type: self.getVideotype,
-                                                                         success: {[unowned self] (url) in
-                                                                            print(url)
-                                                                            self.setupAvplayerViewController(videoURL: url)
-                }) { (errror) in
-                    print(errror)
-                }
-                
+                self.setupAvplayerViewController(videoURL: self.oprocessedVideoURL!)
+
             } else {
                 let alert = self.internetConnectionAlert()
                 self.parrentController?.present(alert, animated: true, completion: nil)
@@ -183,33 +177,51 @@ class SessionCell: UITableViewCell {
     }
     
     func checkIsProcessedVideoExistOnFirebase( succes:@escaping ()->Void, failured:@escaping ()-> Void) {
-     let alert =  VideoUploader.sharedInstance.checkUploadedProcessedVideosFor(session: self.getSessionName) { [unowned self] (existedVideos) in
+     let alert =  VideoUploader.sharedInstance.checkUploadedProcessedVideosFor(session: self.getSessionName) { [unowned self] (existedVideos, videoInfo) in
             if existedVideos.contains(self.getVideotype) {
-                self.processedVideoExist = true
-                succes()
-                DispatchQueue.main.async {
-                    switch self.getVideotype{
-                    case 0:
-                        self.processedImageView.image = UIImage.init(named: "1100")
-                        break
-                    case 1:
-                        self.processedImageView.image = UIImage.init(named: "2100")
-                        break
-                    case 2:
-                        self.processedImageView.image = UIImage.init(named: "3100")
-                        break
-                    default :
-                        break
-                        
-                    }
-                    
+               let dict = videoInfo[self.getVideotype]
+                    if let urlString = dict["videoURL"] {
+                        if let url = URL.init(string: urlString as! String) {
+                            self.oprocessedVideoURL = url
+                            self.processedVideoExist = true
+                            
+                            succes()
+                            DispatchQueue.main.async {
+                                switch self.getVideotype{
+                                case 0:
+                                    self.processedImageView.image = UIImage.init(named: "1100")
+                                    break
+                                case 1:
+                                    self.processedImageView.image = UIImage.init(named: "2100")
+                                    break
+                                case 2:
+                                    self.processedImageView.image = UIImage.init(named: "3100")
+                                    break
+                                default :
+                                    break
+                                    
+                                }
+                            }
+                            
+                                
 
-                }
-            }else {
+                        }
+                    }
+                
+                
+            } else
+             {
                 failured()
+             }
         }
+        
+        
+        if alert != nil {
+            self.parrentController?.present(alert!, animated: true, completion: nil)
         }
     }
+    
+    
     
     func dawnloadProcessedVideo(lenght: String) {
         
@@ -227,8 +239,7 @@ class SessionCell: UITableViewCell {
     
     
     func dawnloadVideo( info: Timer) {
-        let params = self.result //info.userInfo as! [String: Int]
-        print(params)
+        let params = self.result 
         let str = params!["bytes"]! as! String
         let tp = Int.init(str)
         VideoDawnloader.sharedInstance.downloadVideo(sessionName:sessionName!, type: params!["type"]! as! Int, bytes: tp!, success:{ [unowned self] (url) in

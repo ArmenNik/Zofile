@@ -15,9 +15,6 @@ import AVFoundation
 import AVKit
 import SystemConfiguration
 import Alamofire
-//import pop
-//import XHRealTimeBlur
-//import PopMenu
 import Photos
 
 enum Position {
@@ -39,20 +36,21 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     var menuItems = [UIImage]()
     var popMenu :  PopUPManu?
     var existingVideos = [Int]()
+    var videoInfo : [[String: String]]?
     var dawnloadTimer: Timer?
     var rightItem : UIBarButtonItem?
     var uploadView: UIView?
     var indikator: UIActivityIndicatorView?
     private var myTableView: UITableView!
+    var videosInProcess = [Int]()
+    var isMenuShowed: Bool = false
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.sessionsTableView.register(UINib.init(nibName: "SessionCell", bundle: nil), forCellReuseIdentifier: "cell")
         rightItem =  UIBarButtonItem.init(barButtonSystemItem: .camera, target: self, action: #selector(self.showPopMenu))
         self.navigationItem.rightBarButtonItem = rightItem
-       // self.sessionsTableView.backgroundColor = UIColor(red: 61/255, green: 91/255, blue: 151/255, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,17 +66,15 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         menuItems.append(itemOne!)
         menuItems.append(itemTow!)
         menuItems.append(itemThee!)
-       // self.sessionsTableView.delegate = self
-       // self.sessionsTableView.dataSource = self
         self.setupTableView()
-        self.chackRecordedVideos()
-       // self.view.reloadInputViews()
-        
+        self.chackRecordedVideos(complatition: {})
+        if isMenuShowed {
+            self.showPopMenu()
+        }
 
 
     }
-    override func viewDidAppear(_ animated: Bool) {
-    }
+  
     
     func setupTableView() {
         
@@ -96,7 +92,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func showPopMenu() {
-        
+        self.isMenuShowed = true
         self.popMenu = UINib.init(nibName: "PopUPManu", bundle: Bundle.main).instantiate(withOwner: nil, options: nil)[0] as? PopUPManu
          self.popMenu?.setupframe(frame: self.view.bounds, images:menuItems )
         self.popMenu?.didSelectedItem = { [unowned self] (index) in
@@ -104,13 +100,25 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.videoExistAlert()
                 return
             }
+            if self.videosInProcess.contains(index) {
+                if let rootViewController = UIApplication.topViewController() {
+                    let alert = Alerts.sharedInstance.callToAlert(title: "Info", message: "Upload in process")
+                    rootViewController.present(alert, animated: true, completion: nil)
+                }
+                
+                return
+            }
+
             if let recorder = VideoRecorder.sharedInstance.startCameraFromViewController() {
-                self.popMenu?.removeFromSuperview()
                 let recorderVC = VideoRecorder.sharedInstance
                 recorderVC.finishPickingMediaWith = {[unowned self] (info) in
                     UserDefaults.standard.set(index, forKey: "position")
                     UserDefaults.standard.synchronize()
-                    self.uploadVideoToFirebase(url: (info[UIImagePickerControllerMediaURL] as! NSURL) as URL)
+                    let url = (info[UIImagePickerControllerMediaURL] as! NSURL) as URL
+                    VideoUploader.sharedInstance.videoURLs.append(url)
+                    if VideoUploader.sharedInstance.dataTask?.state != .running {
+                        self.uploadVideoToFirebase()
+                    }
                     
                 }
                 self.present(recorder, animated: true, completion: nil)
@@ -120,7 +128,8 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         self.popMenu?.menudidHide = { [unowned self] in
-            
+            self.videosInProcess = [Int]()
+            self.isMenuShowed = false
         }
         UIView.transition(with: self.view, duration: 1, options: .transitionFlipFromLeft, animations: { [unowned self] in
             self.view.addSubview(self.popMenu!)
@@ -129,10 +138,12 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
     
-    func chackRecordedVideos() {
+    func chackRecordedVideos(complatition: @escaping ()->Void) {
         
-        let alert = VideoUploader.sharedInstance.checkUploadedVideosFor(session: self.sessionName!) { [unowned self] (exitingVideos) in
+        let alert = VideoUploader.sharedInstance.checkUploadedVideosFor(session: self.sessionName!) { [unowned self] (exitingVideos, videoInfo) in
             self.existingVideos = [Int]()
+            print("videoInfo = \(videoInfo)")
+            self.videoInfo = videoInfo as? [[String : String]]
             for i in exitingVideos {
                 switch i {
                 case 0 :
@@ -153,7 +164,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                
                 self.existingVideos.append(i)
                 DispatchQueue.main.async { [unowned self] in
-                     self.myTableView.reloadData()
+                         self.myTableView.reloadData()
                          if self.existingVideos.count > 2 {
                             self.rightItem?.isEnabled = false
                          }
@@ -162,8 +173,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
                
                 
             }
-            
-           // self.showPopMenu()
+            complatition()
         }
         if alert != nil {
             self.present(alert!, animated: true, completion: nil)
@@ -182,12 +192,15 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! SessionCell
-        cell.setupCell(name: self.sessionName, type: indexPath.row, parrent: self)
-        cell.backgroundColor = UIColor(red: 61/255, green: 91/255, blue: 151/255, alpha: 1)
-        if self.existingVideos.contains(indexPath.row) {
-            cell.isOriginalVideoExist = true
-            cell.dawnload()
+        var videoLength = ""
+        var videoURL = ""
+        if let dict = self.videoInfo?[indexPath.row] {
+            print(dict)
+            videoLength = dict["length"]!
+            videoURL    = dict["videoURL"]!
         }
+        cell.setupCell(name: self.sessionName, type: indexPath.row, parrent: self, length: videoLength, videoURL: videoURL)
+        cell.backgroundColor = UIColor(red: 61/255, green: 91/255, blue: 151/255, alpha: 1)
         return cell
     }
     
@@ -196,43 +209,60 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    func uploadVideoToFirebase(url: URL) {
+    func reloadPopUpMenu () {
         
-        let uploading = self.uploadingView()
-        self.uploadView = uploading.boxView
-        self.indikator = uploading.activity
-        DispatchQueue.main.async {
-            self.view.isUserInteractionEnabled = false
-            self.myTableView.isUserInteractionEnabled = false
+        self.chackRecordedVideos {
+            DispatchQueue.main.async {
+                self.popMenu?.removeFromSuperview()
+                self.showPopMenu()
+            }
         }
+        
+    }
+    
+    
+    func uploadVideoToFirebase() {
+        
+        DispatchQueue.main.async {
+            let pos = UserDefaults.standard.value(forKey: "position") as! Int
+            self.videosInProcess.append(pos)
+        }
+        
+       
+        let url = VideoUploader.sharedInstance.videoURLs[0]
         let allert =  VideoUploader.sharedInstance.uploadVideoToFirebaseStorage(url: url, success: {
-            
+            DispatchQueue.main.async {
+                self.reloadPopUpMenu()
+            }
             VideoUploader.sharedInstance.uploadVideoToServer(videoUrl: url,
                                                              success: {[unowned self]  (result) in
                                                                 DispatchQueue.main.async { [unowned self] in
-                                                                     self.chackRecordedVideos()
-                                                                     self.perform(#selector(self.closeAnimation), with: nil, afterDelay: 15)
-                                                                    DispatchQueue.main.async {
-                                                                        self.view.isUserInteractionEnabled = true
-                                                                        self.myTableView.isUserInteractionEnabled = true
+                                                                     //self.chackRecordedVideos()
+                                                                    VideoUploader.sharedInstance.videoURLs.remove(at: 0)
+                                                                    if VideoUploader.sharedInstance.videoURLs.count > 0 {
+                                                                        self.uploadVideoToFirebase()
                                                                     }
                                                                                                                                      
                                                                 }
                                                                 print(result)
-                                                                //Show success alert
             },
-                                                             failured: { (error) in
-                                                                print("error upload to server")
-                                                                self.chackRecordedVideos()
-                                                                DispatchQueue.main.async {
-                                                                     self.perform(#selector(self.closeAnimation), with: nil, afterDelay: 15)
-                                                                    DispatchQueue.main.async {
-                                                                        self.view.isUserInteractionEnabled = true
-                                                                        self.myTableView.isUserInteractionEnabled = true
-                                                                    }
-                                                                }
+                failured: { (error, pos) in
+                print("error upload to server")
+                //self.chackRecordedVideos()
+                DispatchQueue.main.async {
+                    self.reloadPopUpMenu()
+                }
+    
+                if self.videosInProcess.contains(Int.init(pos)!){
+                    if let index = self.videosInProcess.index(of:Int.init(pos)!) {
+                        self.videosInProcess.remove(at: index)
+                    }
+                }
+                if let rootViewController = UIApplication.topViewController() {
+                    let alert = Alerts.sharedInstance.callToAlert(title: "Error", message: " \(pos) Upload failed")
+                    rootViewController.present(alert, animated: true, completion: nil)
+                }
                                                                 
-                                                                //Show failured alert
                                                                 
             })
 
@@ -240,12 +270,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
             // Show success uploaded message alert
             
         }, failured: { (error) in
-            uploading.boxView.isHidden = true
-            uploading.activity.stopAnimating()
-            DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = true
-                self.myTableView.isUserInteractionEnabled = true
-            }
+            
             // Show failed uploaded message alert
         })
         
@@ -291,21 +316,7 @@ class SessionViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
   
-    func recordAction(sender: Int, sessionName: String) {
-        
-        UserDefaults.standard.set(sender, forKey: "position")
-        UserDefaults.standard.set(sessionName, forKey: "sessionName")
-        UserDefaults.standard.synchronize()
-        
-        if let recorder = VideoRecorder.sharedInstance.startCameraFromViewController() {
-            let recorderVC = VideoRecorder.sharedInstance
-            recorderVC.finishPickingMediaWith = {[unowned self] (info) in
-                self.uploadVideoToFirebase(url: (info[UIImagePickerControllerMediaURL] as! NSURL) as URL)
-                
-            }
-            self.present(recorder, animated: true, completion: nil)
-        }
-    }
+   
 
     
         

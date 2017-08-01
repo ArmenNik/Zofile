@@ -26,17 +26,23 @@ class PopUPManu: UIView {
         
     }
     @IBOutlet weak var frontImage: UIImageView!
-    
     @IBOutlet weak var rightImage: UIImageView!
     @IBOutlet weak var leftImage: UIImageView!
+    
+    @IBOutlet weak var frontButton: MenuButton!
+    @IBOutlet weak var leftButton: MenuButton!
+    @IBOutlet weak var rightButton: MenuButton!
+    
     @IBAction func frontAction(_ sender: Any) {
         let btn = sender as! UIButton
-        self.didSelectedItem!(btn.tag)
+         self.didSelectedItem!(btn.tag)
+        
     }
     
     @IBAction func rightAction(_ sender: Any) {
         let btn = sender as! UIButton
         self.didSelectedItem!(btn.tag)
+        
 
         
     }
@@ -44,6 +50,7 @@ class PopUPManu: UIView {
     @IBAction func leftAction(_ sender: Any) {
         let btn = sender as! UIButton
         self.didSelectedItem!(btn.tag)
+       
 
         
     }
@@ -55,6 +62,7 @@ class PopUPManu: UIView {
         self.frontImage.image = images[0]
         self.rightImage.image = images[2]
         self.leftImage.image = images[1]
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
