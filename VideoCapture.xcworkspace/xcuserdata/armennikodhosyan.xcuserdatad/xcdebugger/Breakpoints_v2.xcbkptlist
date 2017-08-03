@@ -106,7 +106,7 @@
                   moduleName = "VideoCapture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/armennikodhosyan/Desktop/videocapture/VideoCapture/VideoUploader.swift"
-                  timestampString = "523206582.85079"
+                  timestampString = "523462455.399828"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "158"
@@ -121,7 +121,7 @@
                   moduleName = "VideoCapture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/armennikodhosyan/Desktop/videocapture/VideoCapture/VideoUploader.swift"
-                  timestampString = "523206582.853264"
+                  timestampString = "523462455.402215"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "158"
@@ -154,7 +154,7 @@
                   moduleName = "VideoCapture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/armennikodhosyan/Desktop/videocapture/VideoCapture/SessionCell.swift"
-                  timestampString = "523206582.859276"
+                  timestampString = "523462455.407752"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
@@ -169,7 +169,7 @@
                   moduleName = "VideoCapture"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/armennikodhosyan/Desktop/videocapture/VideoCapture/SessionCell.swift"
-                  timestampString = "523206582.861747"
+                  timestampString = "523462455.410802"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "105"
@@ -208,6 +208,22 @@
             startingLineNumber = "353"
             endingLineNumber = "353"
             landmarkName = "urlSession(_:dataTask:didReceive:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VideoCapture/LoginViewController.swift"
+            timestampString = "523460745.556462"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "keyboardWillAppear()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

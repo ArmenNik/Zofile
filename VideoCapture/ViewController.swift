@@ -70,7 +70,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.myTableView.delegate = nil
         
         if Auth.auth().currentUser?.uid == nil {
-            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+            //perform(#selector(handleLogout), with: nil, afterDelay: 0)
             handleLogout()
         }
         else {
@@ -233,8 +233,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print(logoutError)
         }
         
-        let loginController = LoginController()
+        let storyboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let loginController = storyboard.instantiateViewController(withIdentifier: "loginVC")
         present(loginController, animated: true, completion: nil)
+       // let loginController = LoginController()
+       // present(loginController, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

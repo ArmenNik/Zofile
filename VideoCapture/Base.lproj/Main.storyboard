@@ -1,18 +1,294 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="hot-Gn-3zZ">
+            <objects>
+                <viewController storyboardIdentifier="loginVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zM0-PG-dRU" customClass="LoginViewController" customModule="VideoCapture" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lBE-T5-qZP"/>
+                        <viewControllerLayoutGuide type="bottom" id="SaG-xN-BJh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5O9-c6-bol">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-1" translatesAutoresizingMaskIntoConstraints="NO" id="dwJ-EY-W6r">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5tU-U8-Tt5" customClass="TJTextField" customModule="VideoCapture" customModuleProvider="target">
+                                <rect key="frame" x="56.5" y="452" width="262.5" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="txtImage" value="userIcon"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolerColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="1" green="0.21707875530000001" blue="0.121089129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="imageWidth">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="errorEntry" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextPedding">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SgL-cT-OSO" customClass="TJTextField" customModule="VideoCapture" customModuleProvider="target">
+                                <rect key="frame" x="56.5" y="485.5" width="262.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolerColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextPedding">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="imageWidth">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="txtImage" value="passwordIcon"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signInIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ofW-6o-Abw">
+                                <rect key="frame" x="56" y="534.5" width="262.5" height="65"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrK-N8-Rib">
+                                <rect key="frame" x="56" y="534.5" width="262.5" height="65"/>
+                                <connections>
+                                    <action selector="signInAction:" destination="zM0-PG-dRU" eventType="touchUpInside" id="REN-DW-shK"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signUpIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZxU-tz-oGF">
+                                <rect key="frame" x="121.5" y="600.5" width="131.5" height="32.5"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UP5-2a-4Ny">
+                                <rect key="frame" x="121.5" y="600.5" width="131.5" height="32.5"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                <connections>
+                                    <action selector="signUpAction:" destination="zM0-PG-dRU" eventType="touchUpInside" id="DNi-7j-XqT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ofW-6o-Abw" firstAttribute="centerY" secondItem="5O9-c6-bol" secondAttribute="centerY" multiplier="1.7" id="04C-Vm-eKa"/>
+                            <constraint firstItem="5tU-U8-Tt5" firstAttribute="width" secondItem="dwJ-EY-W6r" secondAttribute="width" multiplier="0.7" id="15B-9D-Txk"/>
+                            <constraint firstItem="dwJ-EY-W6r" firstAttribute="leading" secondItem="5O9-c6-bol" secondAttribute="leading" id="6OK-GX-KG4"/>
+                            <constraint firstItem="CrK-N8-Rib" firstAttribute="width" secondItem="ofW-6o-Abw" secondAttribute="width" id="6WV-rH-Chb"/>
+                            <constraint firstItem="5tU-U8-Tt5" firstAttribute="centerY" secondItem="5O9-c6-bol" secondAttribute="centerY" multiplier="1.4" id="7RE-Uz-Cik"/>
+                            <constraint firstItem="UP5-2a-4Ny" firstAttribute="centerY" secondItem="ZxU-tz-oGF" secondAttribute="centerY" id="AzD-NQ-9mV"/>
+                            <constraint firstItem="SgL-cT-OSO" firstAttribute="width" secondItem="5tU-U8-Tt5" secondAttribute="width" id="BGY-WL-ogy"/>
+                            <constraint firstItem="UP5-2a-4Ny" firstAttribute="width" secondItem="ZxU-tz-oGF" secondAttribute="width" id="DAr-Dx-KPt"/>
+                            <constraint firstItem="SgL-cT-OSO" firstAttribute="centerX" secondItem="5O9-c6-bol" secondAttribute="centerX" id="Hjo-gc-9Yl"/>
+                            <constraint firstItem="SgL-cT-OSO" firstAttribute="centerY" secondItem="5O9-c6-bol" secondAttribute="centerY" multiplier="1.5" id="JQ4-F0-6Mp"/>
+                            <constraint firstItem="CrK-N8-Rib" firstAttribute="centerY" secondItem="ofW-6o-Abw" secondAttribute="centerY" id="Kf7-s1-QkK"/>
+                            <constraint firstItem="5tU-U8-Tt5" firstAttribute="centerX" secondItem="5O9-c6-bol" secondAttribute="centerX" id="NW4-HZ-3ca"/>
+                            <constraint firstItem="ZxU-tz-oGF" firstAttribute="height" secondItem="CrK-N8-Rib" secondAttribute="height" multiplier="0.5" id="OjY-Cb-N4K"/>
+                            <constraint firstAttribute="trailing" secondItem="dwJ-EY-W6r" secondAttribute="trailing" id="PnO-cX-Tmp"/>
+                            <constraint firstItem="ofW-6o-Abw" firstAttribute="centerX" secondItem="5O9-c6-bol" secondAttribute="centerX" id="Srx-xs-ChH"/>
+                            <constraint firstItem="UP5-2a-4Ny" firstAttribute="height" secondItem="ZxU-tz-oGF" secondAttribute="height" id="WKA-bF-Zkq"/>
+                            <constraint firstItem="ZxU-tz-oGF" firstAttribute="centerY" secondItem="5O9-c6-bol" secondAttribute="centerY" multiplier="1.85" id="Zrl-DI-82X"/>
+                            <constraint firstItem="ofW-6o-Abw" firstAttribute="width" secondItem="SgL-cT-OSO" secondAttribute="width" id="cfG-tv-KPA"/>
+                            <constraint firstItem="UP5-2a-4Ny" firstAttribute="centerX" secondItem="ZxU-tz-oGF" secondAttribute="centerX" id="f4B-90-Pfn"/>
+                            <constraint firstItem="ZxU-tz-oGF" firstAttribute="centerX" secondItem="5O9-c6-bol" secondAttribute="centerX" id="hst-XU-cPc"/>
+                            <constraint firstItem="ofW-6o-Abw" firstAttribute="height" secondItem="dwJ-EY-W6r" secondAttribute="height" multiplier="0.1" id="m4D-QJ-a7Q"/>
+                            <constraint firstItem="dwJ-EY-W6r" firstAttribute="top" secondItem="lBE-T5-qZP" secondAttribute="bottom" id="mBf-q4-2jM"/>
+                            <constraint firstItem="CrK-N8-Rib" firstAttribute="centerX" secondItem="ofW-6o-Abw" secondAttribute="centerX" id="o25-AW-XXf"/>
+                            <constraint firstItem="ZxU-tz-oGF" firstAttribute="width" secondItem="CrK-N8-Rib" secondAttribute="width" multiplier="0.5" id="o8W-MO-gHE"/>
+                            <constraint firstItem="CrK-N8-Rib" firstAttribute="height" secondItem="ofW-6o-Abw" secondAttribute="height" id="plc-SN-KSg"/>
+                            <constraint firstItem="SaG-xN-BJh" firstAttribute="top" secondItem="dwJ-EY-W6r" secondAttribute="bottom" id="xjI-a7-tud"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="passwordConstrain" destination="JQ4-F0-6Mp" id="tgc-ZS-WYs"/>
+                        <outlet property="passwordTextField" destination="SgL-cT-OSO" id="zmH-77-dqS"/>
+                        <outlet property="signInButton" destination="CrK-N8-Rib" id="mQk-TN-VS9"/>
+                        <outlet property="signInButtonConstrain" destination="Kf7-s1-QkK" id="ijz-Jm-T7Q"/>
+                        <outlet property="signInConstrain" destination="04C-Vm-eKa" id="57G-ap-68u"/>
+                        <outlet property="signInImageView" destination="ofW-6o-Abw" id="hUP-Ug-vb2"/>
+                        <outlet property="signUpButton" destination="UP5-2a-4Ny" id="eu5-3Y-iNC"/>
+                        <outlet property="signUpButtonConstrain" destination="AzD-NQ-9mV" id="dLx-AD-1LX"/>
+                        <outlet property="signUpConstrain" destination="Zrl-DI-82X" id="yvw-cE-NkV"/>
+                        <outlet property="signUpImageView" destination="ZxU-tz-oGF" id="mb8-JZ-bwd"/>
+                        <outlet property="userNameConstrain" destination="7RE-Uz-Cik" id="j8n-ze-T0q"/>
+                        <outlet property="userNameTextField" destination="5tU-U8-Tt5" id="pnd-gR-vdJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QUW-2D-Fm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-670" y="-176"/>
+        </scene>
+        <!--Sign Up View Controller-->
+        <scene sceneID="qCX-7Y-NPv">
+            <objects>
+                <viewController storyboardIdentifier="signUpVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B1e-K2-0qi" customClass="SignUpViewController" customModule="VideoCapture" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pIj-DX-acQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="zas-jb-3J7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JpO-AN-LQJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-1" translatesAutoresizingMaskIntoConstraints="NO" id="nbj-Fg-wHK">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zo2-1w-3Vh" customClass="TJTextField" customModule="VideoCapture" customModuleProvider="target">
+                                <rect key="frame" x="56.5" y="418.5" width="262.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextPedding">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolerColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="imageWidth">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="txtImage" value="userIcon"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="1" green="0.21707875530000001" blue="0.121089129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YDo-QG-lXv" customClass="TJTextField" customModule="VideoCapture" customModuleProvider="target">
+                                <rect key="frame" x="56.5" y="452" width="262.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextPedding">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="1" green="0.21707875530000001" blue="0.121089129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="imageWidth">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="txtImage" value="passwordIcon"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolerColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7yJ-SG-hvl" customClass="TJTextField" customModule="VideoCapture" customModuleProvider="target">
+                                <rect key="frame" x="56.5" y="485.5" width="262.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftTextPedding">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                                        <color key="value" red="1" green="0.21707875530000001" blue="0.121089129" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolerColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="imageWidth">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="txtImage" value="confirmPasswordIcon"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signUpIconBig" translatesAutoresizingMaskIntoConstraints="NO" id="a5a-Wg-KnU">
+                                <rect key="frame" x="56.5" y="538" width="262.5" height="58"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9R1-eu-9hj">
+                                <rect key="frame" x="56" y="538" width="262.5" height="58"/>
+                                <connections>
+                                    <action selector="signUpAction:" destination="B1e-K2-0qi" eventType="touchUpInside" id="v35-FB-E7g"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signingInSmall" translatesAutoresizingMaskIntoConstraints="NO" id="dia-79-LAF">
+                                <rect key="frame" x="122" y="602.5" width="131.5" height="28.5"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPS-5c-mhO">
+                                <rect key="frame" x="122" y="602.5" width="131.5" height="28.5"/>
+                                <connections>
+                                    <action selector="signInAction:" destination="B1e-K2-0qi" eventType="touchUpInside" id="o8Z-s9-0EE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zo2-1w-3Vh" firstAttribute="centerX" secondItem="JpO-AN-LQJ" secondAttribute="centerX" id="1c5-0z-Jvy"/>
+                            <constraint firstItem="KPS-5c-mhO" firstAttribute="width" secondItem="dia-79-LAF" secondAttribute="width" id="6px-9J-ndi"/>
+                            <constraint firstItem="a5a-Wg-KnU" firstAttribute="centerX" secondItem="JpO-AN-LQJ" secondAttribute="centerX" id="7Cg-L6-rhR"/>
+                            <constraint firstItem="nbj-Fg-wHK" firstAttribute="top" secondItem="pIj-DX-acQ" secondAttribute="bottom" id="7jP-7z-Oop"/>
+                            <constraint firstItem="7yJ-SG-hvl" firstAttribute="centerY" secondItem="JpO-AN-LQJ" secondAttribute="centerY" multiplier="1.5" id="GZ8-lB-C5P"/>
+                            <constraint firstItem="Zo2-1w-3Vh" firstAttribute="centerY" secondItem="JpO-AN-LQJ" secondAttribute="centerY" multiplier="1.3" id="L0Q-Ah-T4t"/>
+                            <constraint firstItem="nbj-Fg-wHK" firstAttribute="leading" secondItem="JpO-AN-LQJ" secondAttribute="leading" id="OJN-Iy-bfm"/>
+                            <constraint firstItem="9R1-eu-9hj" firstAttribute="width" secondItem="a5a-Wg-KnU" secondAttribute="width" id="P1b-lu-inF"/>
+                            <constraint firstItem="KPS-5c-mhO" firstAttribute="centerY" secondItem="dia-79-LAF" secondAttribute="centerY" id="V5v-kk-4PP"/>
+                            <constraint firstItem="7yJ-SG-hvl" firstAttribute="width" secondItem="YDo-QG-lXv" secondAttribute="width" id="WZq-vz-4YI"/>
+                            <constraint firstItem="7yJ-SG-hvl" firstAttribute="centerX" secondItem="JpO-AN-LQJ" secondAttribute="centerX" id="WzT-Hc-LAB"/>
+                            <constraint firstItem="9R1-eu-9hj" firstAttribute="centerY" secondItem="a5a-Wg-KnU" secondAttribute="centerY" id="blI-IT-1uU"/>
+                            <constraint firstItem="dia-79-LAF" firstAttribute="centerY" secondItem="JpO-AN-LQJ" secondAttribute="centerY" multiplier="1.85" id="bvE-lV-4KJ"/>
+                            <constraint firstItem="9R1-eu-9hj" firstAttribute="centerX" secondItem="a5a-Wg-KnU" secondAttribute="centerX" id="ddd-xN-2dF"/>
+                            <constraint firstItem="YDo-QG-lXv" firstAttribute="width" secondItem="Zo2-1w-3Vh" secondAttribute="width" id="es7-t9-SVK"/>
+                            <constraint firstItem="Zo2-1w-3Vh" firstAttribute="width" secondItem="nbj-Fg-wHK" secondAttribute="width" multiplier="0.7" id="ev2-nt-fr8"/>
+                            <constraint firstItem="a5a-Wg-KnU" firstAttribute="height" secondItem="nbj-Fg-wHK" secondAttribute="height" multiplier="0.09" id="htJ-fe-m23"/>
+                            <constraint firstItem="dia-79-LAF" firstAttribute="centerX" secondItem="JpO-AN-LQJ" secondAttribute="centerX" id="nE3-T3-5EL"/>
+                            <constraint firstItem="dia-79-LAF" firstAttribute="height" secondItem="9R1-eu-9hj" secondAttribute="height" multiplier="0.5" id="oiS-sm-CWB"/>
+                            <constraint firstItem="YDo-QG-lXv" firstAttribute="centerX" secondItem="JpO-AN-LQJ" secondAttribute="centerX" id="pCt-I5-vTc"/>
+                            <constraint firstItem="a5a-Wg-KnU" firstAttribute="centerY" secondItem="JpO-AN-LQJ" secondAttribute="centerY" multiplier="1.7" id="qI7-nX-OUO"/>
+                            <constraint firstItem="KPS-5c-mhO" firstAttribute="height" secondItem="dia-79-LAF" secondAttribute="height" id="scP-6d-pEH"/>
+                            <constraint firstItem="9R1-eu-9hj" firstAttribute="height" secondItem="a5a-Wg-KnU" secondAttribute="height" id="t73-Fd-VoC"/>
+                            <constraint firstItem="a5a-Wg-KnU" firstAttribute="width" secondItem="7yJ-SG-hvl" secondAttribute="width" id="uFd-Tl-rc1"/>
+                            <constraint firstItem="zas-jb-3J7" firstAttribute="top" secondItem="nbj-Fg-wHK" secondAttribute="bottom" id="ume-1M-pse"/>
+                            <constraint firstAttribute="trailing" secondItem="nbj-Fg-wHK" secondAttribute="trailing" id="vX5-5e-yhe"/>
+                            <constraint firstItem="KPS-5c-mhO" firstAttribute="centerX" secondItem="dia-79-LAF" secondAttribute="centerX" id="wuA-Wh-DTv"/>
+                            <constraint firstItem="dia-79-LAF" firstAttribute="width" secondItem="9R1-eu-9hj" secondAttribute="width" multiplier="0.5" id="xSF-yc-uIw"/>
+                            <constraint firstItem="YDo-QG-lXv" firstAttribute="centerY" secondItem="JpO-AN-LQJ" secondAttribute="centerY" multiplier="1.4" id="zKB-NQ-Obf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="confirmPasswordConstrain" destination="GZ8-lB-C5P" id="USg-Vp-kOg"/>
+                        <outlet property="confirmPasswordTextField" destination="7yJ-SG-hvl" id="2WP-Nr-zYI"/>
+                        <outlet property="passwordConstrain" destination="zKB-NQ-Obf" id="Lfv-RQ-imr"/>
+                        <outlet property="passwordTextField" destination="YDo-QG-lXv" id="fH1-25-lBq"/>
+                        <outlet property="signInConstrain" destination="bvE-lV-4KJ" id="QXH-Nj-e2N"/>
+                        <outlet property="signInImageView" destination="dia-79-LAF" id="aPt-oh-6Pg"/>
+                        <outlet property="signUpConstrain" destination="qI7-nX-OUO" id="YyD-Ok-cy1"/>
+                        <outlet property="signUpImageView" destination="a5a-Wg-KnU" id="2wq-9I-UjQ"/>
+                        <outlet property="userNameConstrain" destination="L0Q-Ah-T4t" id="VPP-8N-jkX"/>
+                        <outlet property="userNameTextField" destination="Zo2-1w-3Vh" id="f0n-Px-4JX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tec-B4-NFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-671" y="484"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="vc" id="BYZ-38-t0r" customClass="ViewController" customModule="VideoCapture" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sessionVC" id="BYZ-38-t0r" customClass="ViewController" customModule="VideoCapture" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -65,4 +341,14 @@
             <point key="canvasLocation" x="1514" y="-35"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background-1" width="640" height="1136"/>
+        <image name="confirmPasswordIcon" width="27" height="33"/>
+        <image name="passwordIcon" width="25" height="33"/>
+        <image name="signInIcon" width="472" height="102"/>
+        <image name="signUpIcon" width="203" height="44"/>
+        <image name="signUpIconBig" width="472" height="102"/>
+        <image name="signingInSmall" width="203" height="44"/>
+        <image name="userIcon" width="29" height="31"/>
+    </resources>
 </document>
