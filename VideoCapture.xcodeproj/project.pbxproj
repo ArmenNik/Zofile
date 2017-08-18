@@ -114,6 +114,7 @@
 			children = (
 				84FF845B1F33481D005DCF58 /* TJTextField.swift */,
 				840F97011F2F71B200E6CA8D /* ProcessVideo.swift */,
+				9AEEE9DB1F2756DD005E2B35 /* SessionCell.swift */,
 				840F97031F2F723E00E6CA8D /* VideosInProcess.swift */,
 			);
 			name = RealmModel;
@@ -177,7 +178,6 @@
 				9A61966F1F07D9E6008BF5FD /* ViewController.swift */,
 				840F96FE1F2F6AD600E6CA8D /* MenuButton.swift */,
 				9AEEE9D71F274F6B005E2B35 /* SessionViewController.swift */,
-				9AEEE9DB1F2756DD005E2B35 /* SessionCell.swift */,
 				9AEEE9D31F2723B9005E2B35 /* VideoCapture-Bridging-Header.h */,
 				9AEEE9DD1F28AA5D005E2B35 /* VideoRecorder.swift */,
 				9AEEE9DF1F28B0FA005E2B35 /* VideoUploader.swift */,
